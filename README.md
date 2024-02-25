@@ -13,3 +13,4 @@
 # Diplom
 # new_diplom
 # new_diplom
+# Diplom
