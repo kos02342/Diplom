@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ item.manufacturer }}
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="header-bar">
+    <div>
+        <br>
+        <h1>Hello {{ request.user|title }}</h1>        
+    </div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+
+<div class="container mt-5">
+    <h1 class="text-center">{{ item.manufacturer }}</h1>
+    <div class="alert alert-info">
+        <div class="row">
+            <div class="col">
+                <h4>Type:</h4>
+                <p> {{ item.type }}</p>
+            </div>
+            <div class="col">
+                <h4>Quantity:</h4>
+                <p> {{ item.quantity }}</p>
+            </div>
+            <div class="col">
+                <h4>Price:</h4>
+                <p> {{ item.price }}</p>
+            </div>
+            <div class="col">
+                <h4>Status:</h4>
+                <p> {{ item.status }}</p>
+            </div>
+            <div class="col">
+                <h4>Issues:</h4>
+                <p> {{ item.issues }}</p>
+            </div>
+        </div>        
+        <a href="{% url 'display_desktops' %}" class="btn btn-warning" role="button">Back</a>
+        <a href="{% url 'edit_desktop' item.pk %}" class="btn btn-primary">Edit Desktop</a>
+        <a href="{% url 'delete_desktop' item.pk %}" class="btn btn-primary">Delete Desktop</a>
+
+    </div>
+</div>  
+{% endblock %}

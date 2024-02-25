@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title  %} 
+Товары
+{% endblock  %}
+
+{% block content %}
+<br>
+<div class="header-bar">
+    <div>
+        <br>
+        <h1>Hello {{ request.user|title }}</h1>        
+    </div>
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+
+<br>
+<div class="button-group">
+    <a href="{% url 'display_laptops' %}" class="btn btn-primary btn-end" role="button">Laptops</a>      
+    <a href="{% url 'add_laptop' %}" class="btn btn-warning btn-sm" role="button"> +</a>
+
+
+    <a href="{% url 'display_desktops' %}" class="btn btn-primary btn-end" role="button">Desktops</a>    
+    <a href="{% url 'add_desktop' %}" class="btn btn-warning btn-sm" role="button"> +</a>
+
+
+    <a href="{% url 'display_mobiles' %}" class="btn btn-primary btn-end" role="button">Mobiles</a>    
+    <a href="{% url 'add_mobile' %}" class="btn btn-warning btn-sm" role="button"> +</a>
+</div>
+
+<br>
+
+<h4>Currently Viewing {{ header }}</h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Issues</th>            
+            <th>Detail Laptops</th>            
+            <th>Detail Desktops</th>            
+            <th>Detail Mobiles</th>            
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.pk }}</td>
+            <td>{{ item.manufacturer }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.issues }}</td>  
+                  
+            <td><a href="{% url 'laptop_detail' item.pk %}" class="btn btn-warning" role="button">Detail</a></td>
+ 
+            <td><a href="{% url 'desktop_detail' item.pk %}" class="btn btn-warning" role="button">Detail</a></td>
+
+            <td><a href="{% url 'mobile_detail' item.pk %}" class="btn btn-warning" role="button">Detail</a></td>    
+        
+        </tr>
+        {% endfor %}        
+    </tbody>
+</table>
+{% endblock content %}
